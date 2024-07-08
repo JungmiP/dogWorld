@@ -11,6 +11,8 @@ public interface JpaMemberRepository extends JpaRepository<MemberVO, String>{
 	@Query(value="insert into member(id, password, name, birth_date, phone, post, basic_addr, detail_addr, email)"
 			+ "values()", nativeQuery=true)
 	public void join(MemberVO member);
+	
+	public void login(MemberVO member);
 }
 
 

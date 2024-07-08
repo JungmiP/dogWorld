@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import jakarta.servlet.http.HttpServletRequest;
 import kr.ac.kopo.dogworld.demo.jpa.JpaMemberRepository;
+import kr.ac.kopo.dogworld.demo.model.Login;
 import kr.ac.kopo.dogworld.demo.vo.MemberVO;
 
 @Controller
@@ -33,5 +35,23 @@ public class DogWorldController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("join");
 		return mav;
-	} 
+	}
+	
+	//로그인
+	@RequestMapping(value="/loginForm")
+	public ModelAndView loginForm() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("loginForm");
+		return mav;
+	}
+	
+	@RequestMapping(value="/login")
+	public ModelAndView login(HttpServletRequest request) {
+		String id = request.getParameter("id");
+		String password = request.getParameter("password");
+		
+		Login model = new Login();
+		boolean check = model.checkLoginInfo(id, password);
+		return null;
+	}
 }
