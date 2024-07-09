@@ -1,13 +1,16 @@
 package kr.ac.kopo.dogworld.demo.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import jakarta.servlet.http.HttpServletRequest;
 import kr.ac.kopo.dogworld.demo.jpa.JpaMemberRepository;
-import kr.ac.kopo.dogworld.demo.model.Login;
 import kr.ac.kopo.dogworld.demo.vo.MemberVO;
 
 @Controller
@@ -37,6 +40,7 @@ public class DogWorldController {
 		return mav;
 	}
 	
+	
 	//로그인
 	@RequestMapping(value="/loginForm")
 	public ModelAndView loginForm() {
@@ -46,12 +50,21 @@ public class DogWorldController {
 	}
 	
 	@RequestMapping(value="/login")
-	public ModelAndView login(HttpServletRequest request) {
-		String id = request.getParameter("id");
-		String password = request.getParameter("password");
+	public ModelAndView login(MemberVO member) {
+		String loginId = member.getId();
+		String loginPassword = member.getPassword();
+		Optional<MemberVO> loginUser = jpaMember.findById(loginId);
+		String password = loginUser.get().getPassword();
 		
-		Login model = new Login();
-		boolean check = model.checkLoginInfo(id, password);
-		return null;
+		ModelAndView mav = new ModelAndView();
+		if(loginPassword.equals(password)) {
+			mav.addObject("loginUser", member);
+			//도메인주소
+			mav.setViewName("afterLoginPage");
+		} else {
+			mav.setViewName("loginForm");
+		}
+		return mav;
 	}
+
 }

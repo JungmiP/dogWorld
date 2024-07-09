@@ -1,5 +1,7 @@
 package kr.ac.kopo.dogworld.demo.jpa;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -12,7 +14,7 @@ public interface JpaMemberRepository extends JpaRepository<MemberVO, String>{
 			+ "values()", nativeQuery=true)
 	public void join(MemberVO member);
 	
-	public void login(MemberVO member);
+	public Optional<MemberVO> findById(String id);
 }
 
 
