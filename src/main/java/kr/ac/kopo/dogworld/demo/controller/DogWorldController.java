@@ -58,7 +58,7 @@ public class DogWorldController {
 		
 		ModelAndView mav = new ModelAndView();
 		if(loginPassword.equals(password)) {
-			mav.addObject("loginUser", member);
+			mav.addObject("loginUser", loginUser.get());
 			//도메인주소
 			mav.setViewName("afterLoginPage");
 		} else {
