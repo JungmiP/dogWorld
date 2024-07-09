@@ -1,5 +1,6 @@
 package kr.ac.kopo.dogworld.demo.vo;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -7,9 +8,12 @@ import jakarta.persistence.Id;
 public class DogVO {
 	@Id
 	private int no;
+	@Column(name="member_id")
 	private String memberId;
 	private String name;
+	@Column(name="birth_date")
 	private String birthDate;
+	@Column(name="breed_code")
 	private int breedCode;
 	
 	
