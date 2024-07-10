@@ -35,7 +35,7 @@ public class DogWorldController {
 	public ModelAndView joinForm(MemberVO member) {
 		jpaMember.save(member);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("join");
+		mav.setViewName("loginForm");
 		return mav;
 	}
 	
