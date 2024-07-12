@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="unsafe-url">
+    <title>회원정보 수정</title>
+    <link href="/style.css" rel="stylesheet">
+    <script>
+        function formatDate(inputDate) {
+            const date = new Date(inputDate);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const birthDateInput = document.getElementById('birthDate');
+            const birthDateValue = birthDateInput.getAttribute('data-value');
+            birthDateInput.value = formatDate(birthDateValue);
+        });
+    </script>
+</head>
+<body>
+    <div class="form-container">
+    <form action="/myPageEdit" method="post">
+        <div>
+            <label for="name">이름:</label>
+            <input type="text" id="name" name="name" th:value="${loginUser.name}" required>
+        </div>
+        <div>
+            <label for="birthDate">생일:</label>
+            <input type="date" id="birthDate" name="birthDate" th:attr="data-value=${loginUser.birthDate}" required>
+        </div>
+        <div>
+            <label for="phone">전화번호:</label>
+            <input type="text" id="phone" name="phone" th:value="${loginUser.phone}" required>
+        </div>
+        <div>
+            <label for="basicAddr">주소:</label>
+            <input type="text" id="basicAddr" name="basicAddr" th:value="${loginUser.basicAddr}" required>
+        </div>
+        <div>
+            <label for="detailAddr">상세 주소:</label>
+            <input type="text" id="detailAddr" name="detailAddr" th:value="${loginUser.detailAddr}">
+        </div>
+        <div>
+            <label for="post">우편번호:</label>
+            <input type="text" id="post" name="post" th:value="${loginUser.post}" required>
+        </div>
+        <div>
+            <label for="email">이메일:</label>
+            <input type="email" id="email" name="email" th:value="${loginUser.email}" required>
+        </div>
+        <button type="submit">수정</button>
+    </form>
+    </div>
+</body>
+</html>

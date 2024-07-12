@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="unsafe-url">
+    <title>내 애완견 리스트</title>
+    <link href="/style.css" rel="stylesheet">
+</head>
+<body>
+	
+    <div class="form-container">
+    <h2>내 반려견</h2>
+        <div th:each="dog : ${dogs}" class="dog-card">
+            <h3 th:text="${dog.name}">애완견 이름</h3>
+            <p><strong>생일:</strong> <span th:text="${dog.birthDate}">2000-01-01</span></p>
+            <p><strong>견종 코드:</strong> <span th:text="${dog.breedCode}">001</span></p>
+            <form th:action="@{/dogUpdateForm}" method="post">
+                <input type="hidden" name="no" th:value="${dog.no}">
+                <button type="submit" class="btn">수정</button>
+            </form>
+        </div>
+        <div class="button-group">
+			<p><strong><a href="/dogInsertForm">내 반려견 등록</a></strong></p>
+			<p><strong><a href="/">메인페이지로</a></strong></p>
+		</div>
+    </div>
+</body>
+</html>

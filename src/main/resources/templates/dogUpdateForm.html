@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="unsafe-url">
+    <title>애완견 정보 수정</title>
+    <link href="/style.css" rel="stylesheet">
+    <script>
+        function filterBreeds() {
+            const input = document.getElementById('breedInput').value.toLowerCase();
+            const datalist = document.getElementById('breeds');
+            const options = datalist.getElementsByTagName('option');
+            
+            for (let i = 0; i < options.length; i++) {
+                const option = options[i];
+                const breedName = option.textContent.toLowerCase();
+                if (breedName.includes(input)) {
+                    option.style.display = '';
+                } else {
+                    option.style.display = 'none';
+                }
+            }
+        }
+       	//오라클에서 들어온 yyyy:MM:dd HH24:MI:SS' 형식을 yyyy-MM-dd로 변경
+        function formatDate(inputDate) {
+            const date = new Date(inputDate);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const birthDateInput = document.getElementById('birthDate');
+            const birthDateValue = birthDateInput.getAttribute('data-value');
+            birthDateInput.value = formatDate(birthDateValue);
+        });
+    </script>
+</head>
+<body>
+	<div class="form-container">
+    <h1>애완견 정보 수정</h1>
+    <form action="/updateDog" method="post">
+        <input type="hidden" id="no" name="no" th:value="${dog.no}">
+        <input type="hidden" id="memberId" name="memberId" th:value="${dog.memberId}">
+        <div>
+            <label for="name">애완견 이름:</label>
+            <input type="text" id="name" name="name" th:value="${dog.name}" required>
+        </div>
+        <div>
+            <label for="birthDate">생일:</label>
+            <input type="date" id="birthDate" name="birthDate" th:attr="data-value=${dog.birthDate}" required>
+        </div>
+        <div>
+            <label for="breedCode">견종:</label>
+            <input list="breeds" id="breedInput" name="breedCode" th:value="${dog.breedCode}" oninput="filterBreeds()" required>
+            <datalist id="breeds">
+                <option th:each="breed : ${breeds}" th:value="${breed.no}" th:text="${breed.breedName}"></option>
+            </datalist>
+        </div>
+        <button type="submit">수정</button>
+    </form>
+    </div>
+</body>
+</html>

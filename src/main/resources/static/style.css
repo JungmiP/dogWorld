@@ -1,0 +1,183 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #A8E6CF, #FFD3B6);
+    text-align: center;
+    color: #333;
+}
+
+header {
+    background-color: #FF8C94;
+    padding: 20px;
+    color: white;
+}
+
+header .logo {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+header nav {
+    margin-top: 10px;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background: #FFB6B9;
+    font-weight: bold;
+    transition: background 0.3s;
+    font-family: 'MaplestoryOTFLight', sans-serif; /* 한글 글꼴 적용 */
+}
+
+header nav ul li a:hover {
+    background: #FF8C94;
+    color: #333;
+}
+
+.form-container {
+    padding: 40px;
+    background: white;
+    color: #333;
+    border-radius: 10px;
+    margin: 50px auto;
+    max-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    text-align: center; /* 폼 요소들 가운데 정렬 */
+}
+
+.form-container p {
+    margin-bottom: 10px; /* 각 p 태그 사이의 간격 설정 */
+    font-size: 16px; /* 폰트 사이즈 설정 */
+}
+
+.form-container p strong {
+    font-weight: bold; /* strong 태그에 볼드체 적용 */
+    color: #FF8C94; /* 강조 색상 변경 */
+}
+
+.button-group {
+    margin-top: 20px; /* 버튼 그룹 위쪽 여백 설정 */
+    display: flex; /* 요소들을 가로로 나열 */
+    justify-content: space-around; /* 요소들을 좌우로 균등하게 배치 */
+}
+
+.button-group p {
+    margin: 0; /* 기본 마진 제거 */
+}
+
+.button-group a {
+    text-decoration: none; /* 링크 밑줄 제거 */
+    padding: 10px 20px; /* 패딩 설정 */
+    border-radius: 5px; /* 둥근 모서리 설정 */
+    background-color: #FFB6B9; /* 배경색 설정 */
+    color: white; /* 글자색 설정 */
+    font-weight: bold; /* 글꼴 두껍게 설정 */
+    transition: background-color 0.3s, color 0.3s; /* 배경색과 글자색 변화 애니메이션 설정 */
+}
+
+.button-group a:hover {
+    background-color: #FF8C94; /* 호버 상태 배경색 변경 */
+    color: #333; /* 호버 상태 글자색 변경 */
+}
+
+.form-container::before {
+    content: '🐾';
+    font-size: 100px;
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    opacity: 0.1;
+    transform: rotate(-20deg);
+}
+
+.form-container h2 {
+    color: #FF6F61;
+    margin-bottom: 20px;
+    text-align: center; /* 제목 가운데 정렬 */
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 8px;
+    text-align: left; /* 레이블 왼쪽 정렬 */
+    font-family: 'Arial', sans-serif; /* 한글 글꼴 적용 */
+}
+
+.form-container input[type="text"],
+.form-container input[type="password"],
+.form-container input[type="email"],
+.form-container input[type="tel"],
+.form-container input[type="date"],
+.form-container input[type="button"],
+.form-container input[type="submit"],
+.form-container button {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #FF8C94;
+    border-radius: 5px;
+    font-family: 'Arial', sans-serif; /* 한글 글꼴 적용 */
+    display: inline-block;
+}
+
+.form-container input[type="button"],
+.form-container input[type="submit"],
+.form-container button {
+    background: #FFB6B9;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-family: 'Arial', sans-serif; /* 한글 글꼴 적용 */
+}
+
+.form-container input[type="button"]:hover,
+.form-container input[type="submit"]:hover,
+.form-container button:hover {
+    background: #FF8C94;
+    color: #333;
+}
+
+.footer {
+    background: #FF8C94;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    font-family: 'Arial', sans-serif; /* 한글 글꼴 적용 */
+}
+
+/* 추가 한글 글꼴 */
+@font-face {
+    font-family: 'MaplestoryOTFLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/MaplestoryOTFLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

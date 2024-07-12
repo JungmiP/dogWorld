@@ -4,12 +4,189 @@
 <meta charset="UTF-8">
 <meta name="referrer" content="unsafe-url">
 <title>DogWorld</title>
-<link rel="stylesheet" type="text/css" href="styles.css">
+<link href="/style.css" rel="stylesheet">
+<style>
+@charset "UTF-8";
+/* 기본 스타일 */
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #A8E6CF, #FFD3B6); /* 부드러운 파스텔 그라데이션 */
+    text-align: center; /* 글자 가운데 정렬 */
+    color: #333;
+}
+
+header {
+    background-color: #FF8C94; /* 부드러운 핑크색 */
+    padding: 20px;
+    color: white;
+}
+
+header .logo {
+    font-size: 36px;
+    font-weight: bold;
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* 귀여운 글꼴 */
+}
+
+header nav {
+    margin-top: 10px;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background: #FFB6B9; /* 부드러운 오렌지색 */
+    font-weight: bold;
+    transition: background 0.3s;
+    font-family: 'MaplestoryOTFLight', sans-serif; /* 귀여운 한글 글꼴 */
+}
+
+header nav ul li a:hover {
+    background: #FF8C94;
+    color: #333;
+}
+
+.hero {
+    background: #FFD3B6; /* 부드러운 배경색 */
+    color: white;
+    padding: 100px 20px;
+    position: relative;
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* 귀여운 글꼴 */
+    overflow: hidden;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: 48px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero h2 {
+    margin: 10px 0 0;
+    font-size: 24px;
+    color: #FF6F61; /* 텍스트 색상 조정 */
+    position: relative;
+    z-index: 2;
+}
+
+.hero::before,
+.hero::after {
+    content: '🐾 🐾 🐾';
+    font-size: 100px;
+    position: absolute;
+    opacity: 0.2;
+    z-index: 1;
+}
+
+.hero::before {
+    top: 10px;
+    left: 10px;
+    transform: rotate(-30deg);
+}
+
+.hero::after {
+    bottom: 10px;
+    right: 10px;
+    transform: rotate(30deg);
+}
+
+.main-content {
+    padding: 20px;
+    background: white;
+    color: #333;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.main-content::before {
+    content: '🐶';
+    font-size: 150px;
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    opacity: 0.1;
+    transform: rotate(-20deg);
+}
+
+.main-content h2 {
+    color: #FF6F61; /* 텍스트 색상 조정 */
+    margin-bottom: 20px;
+}
+
+.main-content p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+footer {
+    background: #FF8C94; /* 부드러운 핑크색 */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* 귀여운 글꼴 */
+}
+
+/* 한글 글꼴 추가 */
+@font-face {
+    font-family: 'MaplestoryOTFLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/MaplestoryOTFLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+</style>
 </head>
 <body>
-<ul>
-	<li><a href="/join">회원가입</a></li>
-	<li><a href="/loginForm">로그인</a></li>
-</ul>
+<header>
+    <div class="logo">DogWorld</div><br>
+    <nav>
+        <ul>
+            <li th:if="${session.loginUser == null}"><a href="/join">회원가입</a></li>
+            <li th:if="${session.loginUser == null}"><a href="/loginForm">로그인</a></li>
+            <li th:if="${session.loginUser != null}"><a href="/logout">로그아웃</a></li>
+			<li th:if="${session.loginUser != null}"><a href="/myPage">마이페이지</a></li>
+			<li th:if="${session.loginUser != null}"><a href="/dogInsertForm">반려견 추가</a></li>	
+			<li th:if="${session.loginUser != null}"><a href="/dogList">내 반려견 리스트</a></li>
+			<!-- <li th:if="${isAdmin}"><a href="/addbreed">견종추가</a></li><br> -->
+        </ul><br><br>
+        <ul>
+			<li th:if="${session.loginUser != null}"><a href="http://172.31.9.171:8080/DogWorld-WEB/">명랑한 도그: 동물병원</a></li>
+			<li th:if="${session.loginUser != null}"><a href="http://172.31.9.176:8080/">학교종이 댕댕댕: 강아지 유치원</a></li>
+			<li th:if="${session.loginUser != null}"><a href="http://172.31.9.168:8080/Shopping">마이독: 강아지 용품샵</a></li>
+		</ul><br>
+    </nav>
+</header>
+<div class="hero">
+    <h1>Welcome to DogWorld</h1>
+    <h2>Your best friend's best friend</h2>
+</div>
+<div class="main-content">
+    <h2>About Us</h2>
+    <p>Welcome to DogWorld, the ultimate destination for dog lovers! Our mission is to provide the best care and services for your furry friends. Join our community to enjoy exclusive benefits and connect with other dog enthusiasts.</p>
+</div>
+<footer>
+    &copy; 2024 DogWorld. All rights reserved.
+</footer>
 </body>
 </html>

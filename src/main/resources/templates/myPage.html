@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="unsafe-url">
+    <title>마이 페이지</title>
+    <link href="/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="form-container">
+		<h2>회원 정보</h2>
+		<p><strong>ID:</strong> <span th:text="${loginUser.id}"></span></p>
+		<p><strong>이름:</strong> <span th:text="${loginUser.name}"></span></p>
+		<p><strong>생일:</strong> <span th:text="${loginUser.birthDate}"></span></p>
+		<p><strong>전화번호:</strong> <span th:text="${loginUser.phone}"></span></p>
+		<p><strong>주소:</strong> <span th:text="${loginUser.basicAddr}"></span> <span th:text="${loginUser.detailAddr}"></span>( <span th:text="${loginUser.post}"></span>)</p>
+		<p><strong>이메일:</strong> <span th:text="${loginUser.email}"></span></p>
+		<p><strong>가입일:</strong> <span th:text="${loginUser.regDate}"></span></p>
+		    <p><strong>등급:</strong>
+		<span th:switch="${loginUser.grade}">
+		    <span th:case="'B'">브론즈</span>
+		    <span th:case="'S'">실버</span>
+		    <span th:case="'G'">골드</span>
+		</span>
+		<div class="button-group">
+		<p><strong><a href="/dogList">내 반려견 목록</a></strong></p>
+		<p><strong><a href="/myPageEditPAForm">내 정보 수정</a></strong></p>
+		</div>
+    </div>
+</body>
+</html>

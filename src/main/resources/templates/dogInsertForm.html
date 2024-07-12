@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="unsafe-url">
+    <title>애완견 정보 입력</title>
+    <link href="/style.css" rel="stylesheet">
+    <script>
+    	//드롭다운에서 검색도 가능하게 변경
+        function filterBreeds() {
+        	//id가 breedInput인 입력필드값을 가져오고, 대소문자 구별을 하지않기위한 소문자 변환toLowerCase()
+            const input = document.getElementById('breedInput').value.toLowerCase();
+        	//id가 breeds인 datalist 가져옴
+            const datalist = document.getElementById('breeds');
+        	//datalist요소 안에있는 모든 옵션요소
+            const options = datalist.getElementsByTagName('option');
+        	
+            for (let i = 0; i < options.length; i++) {
+                const option = options[i];
+                //모든 option에 들어있는 요소를 소문자 변환후 저장
+                const breedName = option.value.toLowerCase();
+                //입력된 데이터가 옵션에 포함되어있으면 나타내고 아닐경우 block처리
+                if (breedName.includes(input)) {
+                    option.style.display = 'block';
+                } else {
+                    option.style.display = 'none';
+                }
+            }
+        }  	
+    </script>
+</head>
+<body>
+	<div class="form-container">
+    <h2>추가할 반려견 정보</h2>
+    <form action="/dogInsert" method="post">
+        <input type="hidden" id="memberId" name="memberId" th:value="${loginUser.id}">
+        <div>
+            <label for="name">애완견 이름:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="birthDate">생일:</label>
+            <input type="date" id="birthDate" name="birthDate">
+        </div>
+        <div>
+            <label for="breedCode">견종:</label>
+            <input list="breeds" id="breedInput" name="breedCode" oninput="filterBreeds()" required>
+            <datalist id="breeds">
+                <option th:each="breed : ${breeds}" th:value="${breed.no}" th:text="${breed.breedName}"></option>
+            </datalist>
+        </div>
+        <button type="submit">등록</button>
+    </form>
+    </div>
+</body>
+</html>

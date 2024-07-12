@@ -1,19 +1,25 @@
 package kr.ac.kopo.dogworld.demo.vo;
 
-import jakarta.persistence.Column;
+import java.text.SimpleDateFormat;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 
 @Entity(name="dog")
 public class DogVO {
 	@Id
+	//기본키를 자동으로 생성하는 JPA어노테이션, stratgey 키 생성 옵션, 시퀀스를 사용해 키를 생성
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dog_seq")
+	//시퀀스를 정의(name은 generator값과 일치, 시퀀스이름, 시퀀스 번호 증가)
+	@SequenceGenerator(name = "dog_seq", sequenceName = "seq_dog_no", allocationSize = 1)
+	//기본키 자동생성
 	private int no;
-	@Column(name="member_id")
 	private String memberId;
 	private String name;
-	@Column(name="birth_date")
 	private String birthDate;
-	@Column(name="breed_code")
 	private int breedCode;
 	
 	
@@ -27,7 +33,7 @@ public class DogVO {
 		return memberId;
 	}
 	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+		this.memberId = memberId;	
 	}
 	public String getName() {
 		return name;
